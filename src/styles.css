@@ -1,0 +1,275 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition for Regent Peptides.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root block defines the actual color values using oklch.
+ * All colors MUST use oklch format.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-display: var(--font-display);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-stone: var(--brand-stone);
+  --color-brand-mist: var(--brand-mist);
+
+  /* Regent Peptides clinical palette */
+  --color-navy: var(--navy);
+  --color-labblue: var(--labblue);
+  --color-cyan: var(--cyan);
+  --color-platinum: var(--platinum);
+  --color-ink: var(--ink);
+  --color-steel: var(--steel);
+  --color-labwhite: var(--labwhite);
+  --color-clinical: var(--clinical);
+  --color-hairline: var(--hairline);
+  --color-verified: var(--verified);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Archivo", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Clinical laboratory palette — graphite + apothecary green */
+  --navy: #1b1f1d;       /* Graphite near-black (headings, dark surfaces) */
+  --labblue: #0c6b3d;    /* Apothecary green (accents, links) */
+  --cyan: #17925a;       /* Signal green */
+  --platinum: #a8b0ab;   /* Muted grey */
+  --ink: #161917;        /* Near black body text */
+  --steel: #5c6360;      /* Secondary grey */
+  --labwhite: #f7f8f7;   /* Off-white page */
+  --clinical: #f0f2f0;   /* Cool clinical grey */
+  --hairline: #e2e5e2;   /* Hairline borders */
+  --verified: #0c6b3d;   /* Verification green */
+
+  /* Legacy aliases retained so shared components stay on-palette */
+  --brand-deep: var(--navy);
+  --brand-gold: var(--labblue);
+  --brand-cream: var(--ink);
+  --brand-charcoal: var(--labwhite);
+  --brand-stone: var(--steel);
+  --brand-mist: var(--hairline);
+
+  --background: var(--brand-charcoal);
+  --foreground: var(--brand-cream);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--brand-cream);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--brand-cream);
+  --primary: var(--navy);
+  --primary-foreground: #ffffff;
+  --secondary: var(--brand-mist);
+  --secondary-foreground: var(--brand-cream);
+  --muted: var(--brand-mist);
+  --muted-foreground: var(--brand-stone);
+  --accent: var(--clinical);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: var(--hairline);
+  --input: var(--hairline);
+  --ring: var(--cyan);
+  --chart-1: oklch(0.55 0.12 160);
+  --chart-2: oklch(0.65 0.12 85);
+  --chart-3: oklch(0.45 0.08 200);
+  --chart-4: oklch(0.7 0.14 70);
+  --chart-5: oklch(0.5 0.1 30);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: var(--brand-cream);
+  --sidebar-primary: var(--brand-gold);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: var(--brand-mist);
+  --sidebar-accent-foreground: var(--brand-cream);
+  --sidebar-border: oklch(0.9 0.01 250);
+  --sidebar-ring: var(--brand-gold);
+}
+
+.dark {
+  --background: var(--brand-charcoal);
+  --foreground: var(--brand-cream);
+  --card: oklch(0.252 0.046 255);
+  --card-foreground: var(--brand-cream);
+  --popover: oklch(0.252 0.046 255);
+  --popover-foreground: var(--brand-cream);
+  --primary: var(--brand-gold);
+  --primary-foreground: var(--brand-deep);
+  --secondary: oklch(0.3 0.046 255);
+  --secondary-foreground: var(--brand-cream);
+  --muted: oklch(0.3 0.046 255);
+  --muted-foreground: var(--brand-stone);
+  --accent: var(--brand-gold);
+  --accent-foreground: var(--brand-deep);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.98 0.005 85);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: var(--brand-gold);
+  --chart-1: oklch(0.55 0.12 160);
+  --chart-2: oklch(0.65 0.12 85);
+  --chart-3: oklch(0.45 0.08 200);
+  --chart-4: oklch(0.7 0.14 70);
+  --chart-5: oklch(0.5 0.1 30);
+  --sidebar: oklch(0.252 0.046 255);
+  --sidebar-foreground: var(--brand-cream);
+  --sidebar-primary: var(--brand-gold);
+  --sidebar-primary-foreground: var(--brand-deep);
+  --sidebar-accent: oklch(0.3 0.046 255);
+  --sidebar-accent-foreground: var(--brand-cream);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: var(--brand-gold);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@keyframes regent-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-fade-in {
+  animation: regent-fade-in 0.7s ease-out both;
+}
+
+@keyframes regent-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-regent-marquee {
+  animation: regent-marquee 40s linear infinite;
+}
+
+
+@keyframes regent-kenburns {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.16) translate3d(-1.5%, -2%, 0);
+  }
+}
+
+@utility animate-regent-kenburns {
+  animation: regent-kenburns 9s ease-out both;
+}
+
+@keyframes regent-sheen {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@utility animate-regent-sheen {
+  animation: regent-sheen 7s ease-in-out infinite;
+}
+
+@keyframes regent-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@utility animate-regent-glow {
+  animation: regent-glow 6s ease-in-out infinite;
+}
+
+/* Subtle laboratory grid */
+@utility lab-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--navy) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--navy) 6%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@keyframes regent-trace {
+  from { stroke-dashoffset: 1400; }
+  to { stroke-dashoffset: 0; }
+}
+
+@utility animate-regent-trace {
+  animation: regent-trace 3.5s ease-out both;
+}
