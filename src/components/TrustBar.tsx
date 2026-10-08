@@ -1,58 +1,27 @@
-import { ShieldCheck, FileCheck2, Truck, Headphones } from "lucide-react";
-
-const CARDS = [
-  {
-    icon: ShieldCheck,
-    title: "Quality Assured",
-    copy: "Rigorous testing for purity and identity",
-  },
-  {
-    icon: FileCheck2,
-    title: "COA on Request",
-    copy: "Certificate of Analysis available on request",
-  },
-  {
-    icon: Truck,
-    title: "Discreet Shipping",
-    copy: "Secure, tracked UK delivery",
-  },
-
-  {
-    icon: Headphones,
-    title: "Expert Support",
-    copy: "Knowledgeable support for researchers",
-  },
+const POINTS = [
+  "Independently tested by Janoshik Analytical",
+  "Certificate of Analysis with every batch",
+  "Tracked UK delivery from £4.99",
+  "Same-day dispatch before 3pm",
 ];
 
-/** Dark charcoal trust strip directly beneath the navigation. */
+/** Quiet single-line assurance strip directly beneath the navigation. */
 export function TrustBar() {
   return (
-    <section className="bg-navy">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 lg:grid-cols-4">
-        {CARDS.map(({ icon: Icon, title, copy }, i) => (
-          <div
-            key={title}
-            className={`flex items-start gap-3 px-4 py-4 sm:items-center sm:gap-3.5 sm:px-6 md:px-8 md:py-5 ${
-              i % 2 === 1 ? "border-l border-white/12" : ""
-            } ${i > 0 ? "lg:border-l lg:border-white/12" : ""} ${
-              i < 2 ? "border-b border-white/12 lg:border-b-0" : ""
+    <section className="border-b border-hairline bg-labwhite">
+      <ul className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-1.5 px-6 py-2.5 md:px-10">
+        {POINTS.map((point, i) => (
+          <li
+            key={point}
+            className={`items-center gap-2.5 text-[12.5px] text-steel ${
+              i < 2 ? "flex" : "hidden sm:flex"
             }`}
           >
-            <Icon
-              className="mt-0.5 h-5 w-5 shrink-0 text-cyan sm:mt-0"
-              strokeWidth={1.5}
-              aria-hidden
-            />
-
-            <div>
-              <h3 className="font-display text-[11px] font-bold uppercase tracking-[0.16em] text-white">
-                {title}
-              </h3>
-              <p className="mt-1 text-[12px] leading-snug text-white/65">{copy}</p>
-            </div>
-          </div>
+            <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-labblue" aria-hidden />
+            {point}
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

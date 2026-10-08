@@ -31,8 +31,10 @@ const GROUPS = [
   {
     heading: "House",
     links: [
-      { label: "About Us", to: "/about" },
-      { label: "Lab Testing", to: "/lab-testing" },
+      { label: "About", to: "/about" },
+      { label: "Quality", to: "/quality" },
+      { label: "Lab reports", to: "/lab-reports" },
+      { label: "Research library", to: "/research" },
       { label: "FAQ", to: "/faq" },
       { label: "Contact", to: "/contact" },
     ],
@@ -56,32 +58,27 @@ function SitemapPage() {
     <div className="min-h-screen bg-labwhite text-ink">
       <SiteHeader />
 
-      <main>
-        <section className="flex flex-col border-t border-hairline pt-[110px] md:flex-row lg:pt-[156px]">
-          <div className="w-full border-hairline p-8 md:w-[40%] md:border-r md:p-16">
-            <p className="mb-6 text-[10px] uppercase tracking-[0.3em] text-labblue">
-              Sitemap
-            </p>
-            <h1 className="font-display text-5xl leading-[1.1] md:text-6xl">
-              Every <span className="">page.</span>
-            </h1>
-            <p className="mt-8 max-w-sm leading-relaxed text-steel">
+      <main className="pt-[102px] lg:pt-[160px]">
+        <section className="border-b border-hairline bg-white px-6 py-16 md:px-10 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <p className="eyebrow text-labblue">Sitemap</p>
+            <h1 className="headline mt-5 text-[40px] text-navy md:text-[56px]">Every page.</h1>
+            <p className="mt-6 max-w-xl text-[16px] leading-[1.6] text-steel">
               A complete index of the Regent Peptides site.
             </p>
           </div>
-
-          <div className="grid w-full gap-12 p-8 sm:grid-cols-2 md:w-[60%] md:p-16">
+        </section>
+        <section className="bg-white px-6 py-16 md:px-10 md:py-20">
+          <div className="mx-auto grid max-w-7xl gap-12 sm:grid-cols-3">
             {GROUPS.map((group) => (
               <div key={group.heading}>
-                <h2 className="mb-6 text-[10px] uppercase tracking-[0.3em] text-labblue">
-                  {group.heading}
-                </h2>
-                <ul className="space-y-3">
+                <h2 className="text-[13px] text-steel">{group.heading}</h2>
+                <ul className="mt-4 space-y-2.5">
                   {group.links.map((link) => (
                     <li key={link.to}>
                       <Link
                         to={link.to}
-                        className="text-steel transition-colors hover:text-labblue"
+                        className="text-[16px] text-navy transition-colors hover:text-labblue"
                       >
                         {link.label}
                       </Link>

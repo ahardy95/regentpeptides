@@ -44,8 +44,7 @@ function useOfferCountdown() {
       started = Date.now();
       sessionStorage.setItem(OFFER_STORAGE_KEY, String(started));
     }
-    const tick = () =>
-      setRemaining(Math.max(0, started + OFFER_WINDOW_MS - Date.now()));
+    const tick = () => setRemaining(Math.max(0, started + OFFER_WINDOW_MS - Date.now()));
     tick();
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
@@ -63,11 +62,8 @@ export function CartUpsell() {
   const remaining = useOfferCountdown();
 
   const hasWater = useMemo(
-    () =>
-      items.some((item) =>
-        /bacteriostatic|sterile water/i.test(item.product.node.title)
-      ),
-    [items]
+    () => items.some((item) => /bacteriostatic|sterile water/i.test(item.product.node.title)),
+    [items],
   );
 
   useEffect(() => {
@@ -91,9 +87,7 @@ export function CartUpsell() {
   const seconds = Math.floor(((remaining ?? 0) % 60000) / 1000);
 
   const handleAdd = async (variantId: string) => {
-    const variant = offer.variants.edges.find(
-      (v) => v.node.id === variantId
-    )?.node;
+    const variant = offer.variants.edges.find((v) => v.node.id === variantId)?.node;
     if (!variant) return;
     setPending(variantId);
     try {
@@ -104,25 +98,23 @@ export function CartUpsell() {
   };
 
   return (
-    <div className="mb-6 border border-labblue/40 bg-labblue/5 p-5">
+    <div className="mb-6 border border-hairline bg-labwhite p-5">
       <div className="flex items-start gap-3">
-        <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-labblue/10 text-labblue">
+        <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white text-labblue">
           <Droplets className="h-4 w-4" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-labblue">
-            Add your solvent — money off
-          </p>
-          <h3 className="mt-1 font-display text-lg leading-tight text-ink">
+          <p className="text-[12px] font-medium text-labblue">Add your solvent — money off</p>
+          <h3 className="mt-1 text-[16px] font-medium leading-tight text-navy">
             Bacteriostatic Water
           </h3>
-          <p className="mt-1 text-xs leading-relaxed text-steel">
-            Required for reconstituting lyophilised compounds. Sold separately —
-            add it now and save on every size.
+          <p className="mt-1 text-[13px] leading-relaxed text-steel">
+            Required for reconstituting lyophilised compounds. Sold separately — add it now and save
+            on every size.
           </p>
 
           {!expired && remaining !== null ? (
-            <p className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-labblue">
+            <p className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-medium text-labblue">
               <Timer className="h-3 w-3" />
               Offer ends in {minutes}:{String(seconds).padStart(2, "0")}
             </p>
@@ -141,34 +133,21 @@ export function CartUpsell() {
                   className="flex items-center justify-between gap-3 border border-hairline bg-white px-3 py-2.5"
                 >
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-ink">
-                      {variant.title}
-                    </p>
+                    <p className="text-sm font-medium text-ink">{variant.title}</p>
                     <p className="text-xs text-steel">
                       {compareAt ? (
                         <>
                           <span className="line-through">
-                            {formatPrice(
-                              compareAt.toFixed(2),
-                              variant.price.currencyCode
-                            )}
+                            {formatPrice(compareAt.toFixed(2), variant.price.currencyCode)}
                           </span>{" "}
                         </>
                       ) : null}
                       <span className="font-semibold text-labblue">
-                        {formatPrice(
-                          variant.price.amount,
-                          variant.price.currencyCode
-                        )}
+                        {formatPrice(variant.price.amount, variant.price.currencyCode)}
                       </span>
                       {saving > 0 ? (
                         <span className="ml-1 font-semibold text-labblue">
-                          ·{" "}
-                          {formatPrice(
-                            saving.toFixed(2),
-                            variant.price.currencyCode
-                          )}{" "}
-                          off
+                          · {formatPrice(saving.toFixed(2), variant.price.currencyCode)} off
                         </span>
                       ) : null}
                     </p>
@@ -177,13 +156,9 @@ export function CartUpsell() {
                     type="button"
                     onClick={() => handleAdd(variant.id)}
                     disabled={isLoading || expired || pending === variant.id}
-                    className="flex-shrink-0 bg-navy px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex-shrink-0 bg-navy px-4 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-labblue disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {pending === variant.id
-                      ? "Adding…"
-                      : expired
-                        ? "Expired"
-                        : "Add"}
+                    {pending === variant.id ? "Adding…" : expired ? "Expired" : "Add"}
                   </button>
                 </div>
               );

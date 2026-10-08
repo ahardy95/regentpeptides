@@ -14,3 +14,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://regentpeptides.com/sitemap.xml
+Sitemap: https://regentpeptides.com/sitemap-products.xml

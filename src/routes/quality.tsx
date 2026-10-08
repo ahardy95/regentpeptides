@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Chromatogram } from "@/components/Chromatogram";
 import { useCartSync } from "@/lib/cartStore";
 
 const title = "Quality Standards & Verification | Regent Peptides";
@@ -51,91 +50,85 @@ function QualityPage() {
   return (
     <div className="min-h-screen bg-labwhite text-ink">
       <SiteHeader />
-      <main className="pt-[110px] lg:pt-[156px]">
-        <section className="border-b border-hairline bg-white px-6 py-16 md:px-10">
+      <main className="pt-[102px] lg:pt-[160px]">
+        <section className="border-b border-hairline bg-white px-6 py-20 md:px-10 md:py-28">
           <div className="mx-auto max-w-7xl">
-            <p className="text-[10px] uppercase tracking-[0.28em] text-labblue">
-              Verification at Every Stage
-            </p>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-navy md:text-5xl">
-              Quality shouldn’t require trust. It should provide evidence.
+            <p className="eyebrow text-labblue">Quality</p>
+            <h1 className="headline mt-5 max-w-3xl text-[40px] text-navy md:text-[56px]">
+              Quality shouldn’t require trust.{" "}
+              <em className="text-labblue">It should provide evidence.</em>
             </h1>
-            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-steel">
-              Regent Peptides prioritises documented product verification, batch
-              identification and independent analytical testing. Every stage of
-              handling is recorded so that a compound can be traced from
-              incoming material through to the documentation supplied with it.
+            <p className="mt-7 max-w-2xl text-[17px] leading-[1.6] text-steel">
+              Regent Peptides prioritises documented product verification, batch identification and
+              independent analytical testing. Every stage of handling is recorded so that a compound
+              can be traced from incoming material through to the documentation supplied with it.
             </p>
           </div>
         </section>
 
-        <section className="relative overflow-hidden px-6 py-16 md:px-10 md:py-24">
-          <div className="pointer-events-none absolute inset-x-0 top-1/2 h-56 -translate-y-1/2 text-navy opacity-50">
-            <Chromatogram className="h-full w-full" />
-          </div>
-          <div className="relative mx-auto grid max-w-7xl gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {STAGES.map((stage) => (
-              <article
-                key={stage.number}
-                className="rounded-xl border border-hairline bg-white p-7"
-              >
-                <p className="font-mono text-[11px] tracking-[0.2em] text-cyan">
-                  {stage.number}
-                </p>
-                <h2 className="mt-4 font-display text-[13px] font-semibold uppercase tracking-[0.2em] text-navy">
-                  {stage.name}
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-steel">
-                  {stage.copy}
-                </p>
-              </article>
-            ))}
+        <section className="reveal px-6 py-20 md:px-10 md:py-28">
+          <div className="mx-auto max-w-7xl">
+            <h2 className="headline text-[32px] text-navy md:text-[40px]">
+              Four stages, every batch
+            </h2>
+            <ol className="mt-12 grid gap-y-10 border-t border-hairline md:grid-cols-4 md:gap-x-10">
+              {STAGES.map((stage) => (
+                <li key={stage.number} className="pt-7">
+                  <p className="text-[13px] font-medium tracking-[0.12em] text-labblue">
+                    {stage.number}
+                  </p>
+                  <h3 className="mt-5 text-[18px] font-semibold text-navy">{stage.name}</h3>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-steel">{stage.copy}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
-        <section className="border-t border-hairline bg-white px-6 py-16 md:px-10 md:py-20">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">
+        <section className="reveal border-t border-hairline bg-white px-6 py-20 md:px-10 md:py-28">
+          <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-24">
             <div>
-              <h2 className="font-display text-2xl font-semibold tracking-[-0.01em] text-navy md:text-3xl">
-                What documentation covers
+              <h2 className="headline text-[32px] text-navy md:text-[40px]">
+                What the documentation covers
               </h2>
-              <dl className="mt-8 divide-y divide-hairline border-y border-hairline">
+              <dl className="mt-10 divide-y divide-hairline border-y border-hairline">
                 {[
-                  ["Identity", "Confirmation that the material corresponds to the stated compound."],
+                  [
+                    "Identity",
+                    "Confirmation that the material corresponds to the stated compound.",
+                  ],
                   ["Purity", "Quantified analytical result for the tested batch."],
-                  ["Method", "The analytical technique applied, typically HPLC with mass spectrometry."],
-                  ["Batch Reference", "The identifier printed on the product label."],
+                  [
+                    "Method",
+                    "The analytical technique applied, typically HPLC with mass spectrometry.",
+                  ],
+                  ["Batch reference", "The identifier printed on the product label."],
                   ["Form", "Lyophilised powder, sealed vial."],
-                  ["Intended Use", "Laboratory research use only."],
+                  ["Intended use", "Laboratory research use only."],
                 ].map(([term, value]) => (
                   <div key={term} className="flex flex-col gap-1 py-4 sm:flex-row sm:gap-8">
-                    <dt className="text-[10px] uppercase tracking-[0.2em] text-steel sm:w-48 sm:shrink-0">
-                      {term}
-                    </dt>
-                    <dd className="text-sm leading-relaxed text-ink">{value}</dd>
+                    <dt className="text-[14px] text-steel sm:w-44 sm:shrink-0">{term}</dt>
+                    <dd className="text-[15px] leading-relaxed text-ink">{value}</dd>
                   </div>
                 ))}
               </dl>
             </div>
 
-            <div className="rounded-xl border border-hairline bg-labwhite p-8">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-labblue">
-                Documentation Access
-              </p>
-              <h3 className="mt-4 font-display text-xl font-semibold text-navy">
+            <div className="border-t border-navy pt-8 lg:pt-10">
+              <h3 className="text-[22px] font-medium tracking-[-0.01em] text-navy">
                 Look up a batch reference
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-steel">
-                Analytical documentation is indexed by product and batch number.
-                Search the record set to view availability.
+              <p className="mt-3 text-[15px] leading-relaxed text-steel">
+                Analytical documentation is indexed by product and batch number. Search the record
+                set to view what is available for your vial.
               </p>
               <Link
                 to="/lab-reports"
-                className="mt-7 inline-flex rounded-lg bg-navy px-7 py-3.5 font-display text-[10px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:bg-labblue"
+                className="mt-7 inline-flex bg-navy px-6 py-3.5 text-[14px] font-medium text-white transition-colors hover:bg-labblue"
               >
-                Open Lab Reports
+                Open lab reports
               </Link>
-              <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-steel">
+              <p className="mt-10 text-[13px] text-steel">
                 For research use only. Not for human consumption.
               </p>
             </div>

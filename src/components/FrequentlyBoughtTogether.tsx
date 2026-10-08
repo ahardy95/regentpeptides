@@ -17,16 +17,12 @@ export function FrequentlyBoughtTogether({ title, handle }: Props) {
     queryFn: () => fetchProducts(),
   });
 
-  const all: ShopifyProductEdge[] = (data ?? []).filter(
-    (e) => e.node.handle !== handle
-  );
+  const all: ShopifyProductEdge[] = (data ?? []).filter((e) => e.node.handle !== handle);
   if (all.length === 0) return null;
 
   const picks: ShopifyProductEdge[] = [];
   for (const pattern of pairingPatterns(title)) {
-    const found = all.find(
-      (e) => pattern.test(e.node.title) && !picks.includes(e)
-    );
+    const found = all.find((e) => pattern.test(e.node.title) && !picks.includes(e));
     if (found) picks.push(found);
   }
   for (const edge of all) {
@@ -38,15 +34,12 @@ export function FrequentlyBoughtTogether({ title, handle }: Props) {
   if (selection.length === 0) return null;
 
   return (
-    <section className="border-t border-hairline px-8 py-20 md:px-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
-        <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-labblue">
-          Research pairings
-        </p>
-        <h2 className="font-display text-3xl md:text-4xl">
-          Frequently Bought Together
+    <section className="border-t border-hairline bg-white px-6 py-20 md:px-10 md:py-28">
+      <div className="mx-auto max-w-7xl">
+        <h2 className="headline text-[36px] text-navy md:text-[44px]">
+          Frequently bought together
         </h2>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-3 lg:gap-x-10">
           {selection.map((edge) => (
             <ProductCard key={edge.node.handle} product={edge} />
           ))}

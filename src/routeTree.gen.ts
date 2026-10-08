@@ -25,9 +25,11 @@ import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as SitemapRouteImport } from './routes/sitemap'
+import { Route as SitemapProductsDotxmlRouteImport } from './routes/sitemap-products[.]xml'
 import { Route as StandardsRouteImport } from './routes/standards'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
+import { Route as ResearchSlugRouteImport } from './routes/research_.$slug'
 import { Route as ApiPublicNewsletterSubscribeRouteImport } from './routes/api/public/newsletter-subscribe'
 
 const IndexRoute = IndexRouteImport.update({
@@ -110,6 +112,11 @@ const SitemapRoute = SitemapRouteImport.update({
   path: '/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapProductsDotxmlRoute = SitemapProductsDotxmlRouteImport.update({
+  id: '/sitemap-products.xml',
+  path: '/sitemap-products.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StandardsRoute = StandardsRouteImport.update({
   id: '/standards',
   path: '/standards',
@@ -123,6 +130,11 @@ const TermsRoute = TermsRouteImport.update({
 const ProductHandleRoute = ProductHandleRouteImport.update({
   id: '/product/$handle',
   path: '/product/$handle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchSlugRoute = ResearchSlugRouteImport.update({
+  id: '/research_/$slug',
+  path: '/research/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicNewsletterSubscribeRoute =
@@ -149,9 +161,11 @@ export interface FileRoutesByFullPath {
   '/returns': typeof ReturnsRoute
   '/shipping': typeof ShippingRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-products.xml': typeof SitemapProductsDotxmlRoute
   '/standards': typeof StandardsRoute
   '/terms': typeof TermsRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/research/$slug': typeof ResearchSlugRoute
   '/api/public/newsletter-subscribe': typeof ApiPublicNewsletterSubscribeRoute
 }
 export interface FileRoutesByTo {
@@ -171,9 +185,11 @@ export interface FileRoutesByTo {
   '/returns': typeof ReturnsRoute
   '/shipping': typeof ShippingRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-products.xml': typeof SitemapProductsDotxmlRoute
   '/standards': typeof StandardsRoute
   '/terms': typeof TermsRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/research/$slug': typeof ResearchSlugRoute
   '/api/public/newsletter-subscribe': typeof ApiPublicNewsletterSubscribeRoute
 }
 export interface FileRoutesById {
@@ -194,9 +210,11 @@ export interface FileRoutesById {
   '/returns': typeof ReturnsRoute
   '/shipping': typeof ShippingRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-products.xml': typeof SitemapProductsDotxmlRoute
   '/standards': typeof StandardsRoute
   '/terms': typeof TermsRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/research_/$slug': typeof ResearchSlugRoute
   '/api/public/newsletter-subscribe': typeof ApiPublicNewsletterSubscribeRoute
 }
 export interface FileRouteTypes {
@@ -218,9 +236,11 @@ export interface FileRouteTypes {
     | '/returns'
     | '/shipping'
     | '/sitemap'
+    | '/sitemap-products.xml'
     | '/standards'
     | '/terms'
     | '/product/$handle'
+    | '/research/$slug'
     | '/api/public/newsletter-subscribe'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -240,9 +260,11 @@ export interface FileRouteTypes {
     | '/returns'
     | '/shipping'
     | '/sitemap'
+    | '/sitemap-products.xml'
     | '/standards'
     | '/terms'
     | '/product/$handle'
+    | '/research/$slug'
     | '/api/public/newsletter-subscribe'
   id:
     | '__root__'
@@ -262,9 +284,11 @@ export interface FileRouteTypes {
     | '/returns'
     | '/shipping'
     | '/sitemap'
+    | '/sitemap-products.xml'
     | '/standards'
     | '/terms'
     | '/product/$handle'
+    | '/research_/$slug'
     | '/api/public/newsletter-subscribe'
   fileRoutesById: FileRoutesById
 }
@@ -285,9 +309,11 @@ export interface RootRouteChildren {
   ReturnsRoute: typeof ReturnsRoute
   ShippingRoute: typeof ShippingRoute
   SitemapRoute: typeof SitemapRoute
+  SitemapProductsDotxmlRoute: typeof SitemapProductsDotxmlRoute
   StandardsRoute: typeof StandardsRoute
   TermsRoute: typeof TermsRoute
   ProductHandleRoute: typeof ProductHandleRoute
+  ResearchSlugRoute: typeof ResearchSlugRoute
   ApiPublicNewsletterSubscribeRoute: typeof ApiPublicNewsletterSubscribeRoute
 }
 
@@ -405,6 +431,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap-products.xml': {
+      id: '/sitemap-products.xml'
+      path: '/sitemap-products.xml'
+      fullPath: '/sitemap-products.xml'
+      preLoaderRoute: typeof SitemapProductsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/standards': {
       id: '/standards'
       path: '/standards'
@@ -424,6 +457,13 @@ declare module '@tanstack/react-router' {
       path: '/product/$handle'
       fullPath: '/product/$handle'
       preLoaderRoute: typeof ProductHandleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/research_/$slug': {
+      id: '/research_/$slug'
+      path: '/research/$slug'
+      fullPath: '/research/$slug'
+      preLoaderRoute: typeof ResearchSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/newsletter-subscribe': {
@@ -453,9 +493,11 @@ const rootRouteChildren: RootRouteChildren = {
   ReturnsRoute: ReturnsRoute,
   ShippingRoute: ShippingRoute,
   SitemapRoute: SitemapRoute,
+  SitemapProductsDotxmlRoute: SitemapProductsDotxmlRoute,
   StandardsRoute: StandardsRoute,
   TermsRoute: TermsRoute,
   ProductHandleRoute: ProductHandleRoute,
+  ResearchSlugRoute: ResearchSlugRoute,
   ApiPublicNewsletterSubscribeRoute: ApiPublicNewsletterSubscribeRoute,
 }
 export const routeTree = rootRouteImport

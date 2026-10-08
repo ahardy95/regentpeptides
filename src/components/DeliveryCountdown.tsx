@@ -15,9 +15,10 @@ function londonParts(date: Date) {
     second: "2-digit",
     weekday: "short",
   });
-  const parts = Object.fromEntries(
-    fmt.formatToParts(date).map((p) => [p.type, p.value])
-  ) as Record<string, string>;
+  const parts = Object.fromEntries(fmt.formatToParts(date).map((p) => [p.type, p.value])) as Record<
+    string,
+    string
+  >;
   return {
     hour: Number(parts["hour"] === "24" ? "0" : parts["hour"]),
     minute: Number(parts["minute"]),
@@ -40,32 +41,23 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-function DigitBox({ digit, label }: { digit: string; label: string }) {
+function Digit({ value, label }: { value: string; label: string }) {
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="relative overflow-hidden rounded-sm border border-hairline bg-white px-3 py-3 shadow-[inset_0_0_24px_rgba(0,35,102,0.06)] sm:px-4 sm:py-4">
-        <span className="block min-w-[1.1em] text-center font-display text-3xl text-ink tabular-nums sm:text-4xl">
-          {digit}
-        </span>
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-clinical" />
-      </div>
-      <span className="text-[9px] uppercase tracking-[0.25em] text-steel">
-        {label}
-      </span>
-    </div>
+    <span className="flex items-baseline gap-1">
+      <span className="text-[22px] font-medium leading-none text-navy tabular-nums">{value}</span>
+      <span className="text-[11px] uppercase tracking-[0.08em] text-steel">{label}</span>
+    </span>
   );
 }
 
-function Colon() {
-  return (
-    <div className="flex flex-col justify-center gap-2 pb-6 text-labblue/60">
-      <span className="h-1.5 w-1.5 rounded-full bg-current" />
-      <span className="h-1.5 w-1.5 rounded-full bg-current" />
-    </div>
-  );
-}
-
-export function DeliveryCountdown({ className }: { className?: string }) {
+export function DeliveryCountdown({
+  className,
+  stack,
+}: {
+  className?: string;
+  /** Always stack copy above the timer (narrow columns). */
+  stack?: boolean;
+}) {
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -86,39 +78,39 @@ export function DeliveryCountdown({ className }: { className?: string }) {
 
   return (
     <div
-      className={`flex flex-col items-center gap-6 border border-hairline bg-white px-6 py-6 text-center sm:flex-row sm:justify-center sm:gap-8 sm:text-left ${className ?? ""}`}
+      className={`flex flex-col gap-3 py-5 ${
+        stack ? "" : "sm:flex-row sm:items-center sm:justify-between sm:gap-8"
+      } ${className ?? ""}`}
     >
-      <Truck
-        className="h-5 w-5 shrink-0 text-labblue"
-        strokeWidth={1}
-        aria-hidden="true"
-      />
-
-      <div>
-        <p className="text-[10px] uppercase tracking-[0.3em] text-labblue">
-          Order before 3:00pm
+      <div className="flex items-start gap-3">
+        <Truck
+          className="mt-0.5 h-[18px] w-[18px] shrink-0 text-labblue"
+          strokeWidth={1.4}
+          aria-hidden="true"
+        />
+        <p className="text-[14px] leading-snug text-ink">
+          <span className="font-medium">Order before 3pm</span>
+          <span className="text-steel">
+            {" "}
+            for same-day UK dispatch on Royal Mail Tracked 24, from £4.99.
+          </span>
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-steel">
-          For same-day UK dispatch on Royal Mail Tracked 24 (from £4.99).
-        </p>
-
       </div>
 
       {now === null ? (
-        <div className="h-20 w-52" aria-hidden />
+        <div className="h-7 w-44" aria-hidden />
       ) : open ? (
-        <div className="flex items-center gap-2 sm:gap-3">
-          <DigitBox digit={pad(hours)} label="Hrs" />
-          <Colon />
-          <DigitBox digit={pad(minutes)} label="Min" />
-          <Colon />
-          <DigitBox digit={pad(seconds)} label="Sec" />
+        <div className={`flex shrink-0 items-center gap-4 pl-[30px] ${stack ? "" : "sm:pl-0"}`}>
+          <Digit value={pad(hours)} label="hrs" />
+          <Digit value={pad(minutes)} label="min" />
+          <Digit value={pad(seconds)} label="sec" />
+          <span className="hidden text-[12px] text-steel md:inline">until cut-off</span>
         </div>
       ) : (
-        <p className="font-display text-lg text-ink">
+        <p className={`shrink-0 pl-[30px] text-[14px] text-steel ${stack ? "" : "sm:pl-0"}`}>
           {isWeekend
             ? "Orders dispatch the next working day"
-            : "Today's cut-off has passed — ships tomorrow"}
+            : "Today’s cut-off has passed — ships tomorrow"}
         </p>
       )}
     </div>

@@ -102,7 +102,7 @@ export function NewsletterPopup() {
       localStorage.setItem(SUBSCRIBED_KEY, "1");
       localStorage.setItem(
         WELCOME_CODES_KEY,
-        JSON.stringify({ high: data.code, low: data.codeLow ?? null })
+        JSON.stringify({ high: data.code, low: data.codeLow ?? null }),
       );
       setCode(data.code);
       setStatus("done");
@@ -136,36 +136,35 @@ export function NewsletterPopup() {
       aria-modal="true"
       aria-label="Newsletter signup"
     >
-      <div className="relative w-full max-w-md rounded-2xl border border-hairline bg-labwhite p-7 shadow-2xl md:p-9">
+      <div className="relative w-full max-w-md bg-white p-8 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.5)] md:p-10">
         <button
           type="button"
           onClick={dismiss}
           aria-label="Close"
-          className="absolute right-4 top-4 rounded-full p-1.5 text-steel transition-colors hover:bg-clinical hover:text-navy"
+          className="absolute right-4 top-4 p-1.5 text-steel transition-colors hover:text-navy"
         >
           <X className="h-4 w-4" />
         </button>
 
         {status === "done" && code ? (
           <div className="text-center">
-            <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-labblue/10 text-labblue">
+            <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-labblue text-white">
               <Check className="h-5 w-5" />
             </div>
-            <h2 className="mt-5 font-display text-2xl font-semibold tracking-[-0.02em] text-navy">
-              You're on the research list
+            <h2 className="mt-5 text-[24px] font-medium tracking-[-0.02em] text-navy">
+              You’re on the research list
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-steel">
-              Here is your one time use store credit code. Enter or apply it at
-              checkout.
+              Here is your one time use store credit code. Enter or apply it at checkout.
             </p>
-            <div className="mt-6 flex items-center justify-between gap-3 rounded-xl border border-dashed border-labblue/50 bg-white px-4 py-3.5">
+            <div className="mt-6 flex items-center justify-between gap-3 border border-hairline bg-labwhite px-4 py-3.5">
               <span className="font-mono text-base font-semibold tracking-[0.12em] text-labblue">
                 {code}
               </span>
               <button
                 type="button"
                 onClick={copyCode}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-navy px-3 py-2 font-display text-[10px] font-semibold uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-90"
+                className="inline-flex items-center gap-1.5 bg-navy px-3 py-2 text-[12px] font-medium text-white transition-colors hover:bg-labblue"
               >
                 <Copy className="h-3.5 w-3.5" />
                 {copied ? "Copied" : "Copy"}
@@ -174,22 +173,20 @@ export function NewsletterPopup() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="mt-6 font-display text-[10px] font-semibold uppercase tracking-[0.22em] text-steel underline-offset-4 hover:text-navy hover:underline"
+              className="mt-6 text-[13px] text-steel underline-offset-4 hover:text-navy hover:underline"
             >
               Continue browsing
             </button>
           </div>
         ) : (
           <>
-            <p className="text-[10px] uppercase tracking-[0.28em] text-labblue">
-              Research List
-            </p>
-            <h2 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-[-0.02em] text-navy">
-              Up to £10 instant store credit for first time customers
+            <p className="eyebrow text-labblue">Welcome offer</p>
+            <h2 className="headline mt-4 text-[28px] text-navy">
+              Up to £10 store credit on your first order
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-steel">
-              Join the research list for launch alerts, batch drops and priority
-              stock access, plus a one time use store credit code.
+            <p className="mt-3 text-[15px] leading-relaxed text-steel">
+              Join the research list for new compounds, batch releases and priority stock access.
+              Your one-time credit code arrives instantly.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-3">
@@ -200,7 +197,7 @@ export function NewsletterPopup() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
                 maxLength={255}
-                className="w-full rounded-lg border border-hairline bg-white px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-steel/70 focus:border-labblue"
+                className="w-full border border-hairline bg-white px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-steel/70 focus:border-navy"
               />
 
               <div className="flex gap-2">
@@ -208,7 +205,7 @@ export function NewsletterPopup() {
                   value={dialCode}
                   onChange={(e) => setDialCode(e.target.value)}
                   aria-label="Country code"
-                  className="rounded-lg border border-hairline bg-white px-3 py-3 text-sm text-ink outline-none focus:border-labblue"
+                  className="border border-hairline bg-white px-3 py-3 text-[15px] text-ink outline-none focus:border-navy"
                 >
                   {DIAL_CODES.map((c) => (
                     <option key={c.code} value={c.code}>
@@ -222,7 +219,7 @@ export function NewsletterPopup() {
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Phone (optional)"
                   maxLength={20}
-                  className="w-full rounded-lg border border-hairline bg-white px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-steel/70 focus:border-labblue"
+                  className="w-full border border-hairline bg-white px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-steel/70 focus:border-navy"
                 />
               </div>
 
@@ -244,17 +241,16 @@ export function NewsletterPopup() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full rounded-lg bg-labblue px-6 py-3.5 font-display text-[11px] font-semibold uppercase tracking-[0.22em] text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                className="w-full bg-labblue px-6 py-3.5 text-[14px] font-medium text-white transition-colors hover:bg-navy disabled:opacity-60"
               >
-                {status === "loading" ? "Claiming…" : "Claim up to £10 store credit"}
+                {status === "loading" ? "One moment…" : "Claim my store credit"}
               </button>
             </form>
 
-            <p className="mt-5 text-[10px] leading-relaxed text-steel">
-              For laboratory research use only. £5 off orders over £30, £10 off
-              orders over £80. Applied automatically at checkout, minimum spend
-              applies. By submitting, you agree to receive email updates — and SMS
-              offers if you enter a phone number.
+            <p className="mt-5 text-[12px] leading-relaxed text-steel">
+              For laboratory research use only. £5 off orders over £30, £10 off orders over £80.
+              Applied automatically at checkout, minimum spend applies. By submitting, you agree to
+              receive email updates — and SMS offers if you enter a phone number.
             </p>
           </>
         )}

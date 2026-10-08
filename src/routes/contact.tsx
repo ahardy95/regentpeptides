@@ -49,31 +49,30 @@ function ContactPage() {
     }
   };
 
-
   return (
     <div className="min-h-screen bg-labwhite text-ink">
       <SiteHeader />
 
-      <main className="border-t border-hairline px-8 pb-24 pt-36 md:px-16 md:pt-44">
-        <div className="mx-auto flex max-w-6xl flex-col gap-16 md:flex-row">
+      <main className="border-t border-hairline bg-white px-6 pb-24 pt-[134px] md:px-10 md:pb-32 lg:pt-[216px]">
+        <div className="mx-auto flex max-w-7xl flex-col gap-16 md:flex-row md:gap-24">
           <div className="md:w-[45%]">
-            <p className="mb-6 text-[10px] uppercase tracking-[0.3em] text-labblue">
-              Contact Us
-            </p>
-            <h1 className="font-display text-5xl leading-[1.1] md:text-6xl">
-              Speak with
-              <br />
-              <span className="">the desk.</span>
+            <p className="eyebrow text-labblue">Contact</p>
+            <h1 className="headline mt-5 text-[40px] text-navy md:text-[56px]">
+              Speak with <em className="text-labblue">the desk.</em>
             </h1>
-            <p className="mt-8 max-w-md leading-relaxed text-steel">
-              Order support, batch certificates, bulk and trade enquiries — all
-              handled directly by our UK team, never a call centre.
+            <p className="mt-7 max-w-md text-[17px] leading-[1.6] text-steel">
+              Order support, batch certificates, bulk and trade enquiries — all handled directly by
+              our UK team, never a call centre.
             </p>
 
-            <dl className="mt-14 space-y-8">
+            <dl className="mt-12 space-y-7 border-t border-hairline pt-8">
               {[
                 [Mail, "Email", "concierge@regentpeptides.com"],
-                [Clock, "Hours", "Monday to Friday, 09:00 – 17:00 (UK time), excluding bank holidays"],
+                [
+                  Clock,
+                  "Hours",
+                  "Monday to Friday, 09:00 – 17:00 (UK time), excluding bank holidays",
+                ],
                 [
                   MapPin,
                   "Registered office",
@@ -88,10 +87,8 @@ function ContactPage() {
                       strokeWidth={1.25}
                     />
                     <div>
-                      <dt className="text-[10px] uppercase tracking-[0.3em] text-labblue">
-                        {label as string}
-                      </dt>
-                      <dd className="mt-2 text-sm text-steel">
+                      <dt className="text-[13px] text-steel">{label as string}</dt>
+                      <dd className="mt-1 text-[15px] leading-relaxed text-navy">
                         {value as string}
                       </dd>
                     </div>
@@ -101,26 +98,20 @@ function ContactPage() {
             </dl>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex-1 space-y-6">
+          <form onSubmit={handleSubmit} className="flex-1 space-y-7 md:pt-2">
             <div>
-              <label
-                htmlFor="c-name"
-                className="block text-[10px] uppercase tracking-[0.3em] text-labblue"
-              >
+              <label htmlFor="c-name" className="block text-[13px] text-steel">
                 Name
               </label>
               <input
                 id="c-name"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="mt-3 w-full border-b border-navy/25 bg-transparent pb-3 text-ink outline-none transition-colors focus:border-navy"
+                className="mt-2 w-full border-b border-hairline bg-transparent pb-3 text-[16px] text-ink outline-none transition-colors focus:border-navy"
               />
             </div>
             <div>
-              <label
-                htmlFor="c-email"
-                className="block text-[10px] uppercase tracking-[0.3em] text-labblue"
-              >
+              <label htmlFor="c-email" className="block text-[13px] text-steel">
                 Email
               </label>
               <input
@@ -129,14 +120,11 @@ function ContactPage() {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="mt-3 w-full border-b border-navy/25 bg-transparent pb-3 text-ink outline-none transition-colors focus:border-navy"
+                className="mt-2 w-full border-b border-hairline bg-transparent pb-3 text-[16px] text-ink outline-none transition-colors focus:border-navy"
               />
             </div>
             <div>
-              <label
-                htmlFor="c-message"
-                className="block text-[10px] uppercase tracking-[0.3em] text-labblue"
-              >
+              <label htmlFor="c-message" className="block text-[13px] text-steel">
                 Message
               </label>
               <textarea
@@ -145,14 +133,14 @@ function ContactPage() {
                 required
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="mt-3 w-full resize-none border-b border-navy/25 bg-transparent pb-3 text-ink outline-none transition-colors focus:border-navy"
+                className="mt-2 w-full resize-none border-b border-hairline bg-transparent pb-3 text-[16px] text-ink outline-none transition-colors focus:border-navy"
               />
             </div>
             <button
               type="submit"
-              className="bg-navy px-10 py-4 text-[10px] font-medium uppercase tracking-[0.3em] text-white transition-colors hover:opacity-90"
+              className="bg-navy px-7 py-4 text-[14px] font-medium text-white transition-colors hover:bg-labblue"
             >
-              Compose Email
+              Compose email
             </button>
           </form>
         </div>

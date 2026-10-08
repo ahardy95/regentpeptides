@@ -16,13 +16,7 @@ export function BrandLogo({ className, inverted, compact }: BrandLogoProps) {
 
   return (
     <span className={`flex items-center gap-2.5 ${className ?? ""}`}>
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 40 40"
-        aria-hidden
-        className="shrink-0"
-      >
+      <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden className="shrink-0">
         {/* Hexagon (molecular cell) */}
         <path
           d="M20 1.6 L35.6 10.8 L35.6 29.2 L20 38.4 L4.4 29.2 L4.4 10.8 Z"
@@ -41,10 +35,10 @@ export function BrandLogo({ className, inverted, compact }: BrandLogoProps) {
           x="20"
           y="24"
           textAnchor="middle"
-          fontFamily="Archivo, Inter, sans-serif"
-          fontSize="15"
-          fontWeight="800"
-          letterSpacing="-0.5"
+          fontFamily="Instrument Sans Variable, Instrument Sans, sans-serif"
+          fontSize="14"
+          fontWeight="600"
+          letterSpacing="-0.3"
           fill={ink}
         >
           RP
@@ -52,16 +46,16 @@ export function BrandLogo({ className, inverted, compact }: BrandLogoProps) {
       </svg>
       <span className="flex flex-col leading-none">
         <span
-          className={`font-display font-extrabold uppercase ${
+          className={`font-sans font-bold uppercase ${
             compact ? "text-[15px]" : "text-[17px]"
-          } tracking-[0.02em] ${inverted ? "text-white" : "text-navy"}`}
+          } leading-none tracking-[0.06em] ${inverted ? "text-white" : "text-navy"}`}
         >
           Regent
         </span>
         <span
-          className={`mt-[3px] font-display font-semibold uppercase ${
-            compact ? "text-[8.5px]" : "text-[9.5px]"
-          } tracking-[0.34em] ${inverted ? "text-white/60" : "text-labblue"}`}
+          className={`mt-[4px] font-sans font-medium uppercase ${
+            compact ? "text-[8px]" : "text-[9px]"
+          } tracking-[0.32em] ${inverted ? "text-white/60" : "text-labblue"}`}
         >
           Peptides
         </span>

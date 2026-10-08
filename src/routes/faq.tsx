@@ -40,43 +40,57 @@ function FaqPage() {
     <div className="min-h-screen bg-labwhite text-ink">
       <SiteHeader />
 
-      <main>
-        <section className="flex flex-col border-t border-hairline pt-[110px] md:flex-row lg:pt-[156px]">
-          <div className="w-full border-hairline p-8 md:w-[40%] md:border-r md:p-16">
-            <p className="mb-6 text-[10px] uppercase tracking-[0.3em] text-labblue">
-              Frequently Asked
-            </p>
-            <h1 className="font-display text-5xl leading-[1.1] md:text-6xl">
-              Questions, <span className="">answered.</span>
+      <main className="pt-[102px] lg:pt-[160px]">
+        <section className="border-b border-hairline bg-white px-6 py-16 md:px-10 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <p className="eyebrow text-labblue">Help</p>
+            <h1 className="headline mt-5 text-[40px] text-navy md:text-[56px]">
+              Questions, <em className="text-labblue">answered.</em>
             </h1>
-            <p className="mt-8 max-w-sm leading-relaxed text-steel">
-              If something isn't covered here, our London concierge will answer
-              directly — usually the same working day.
+            <p className="mt-6 max-w-xl text-[16px] leading-[1.6] text-steel">
+              If something isn’t covered here, our London desk will answer directly, usually the
+              same working day.
             </p>
             <Link
               to="/contact"
-              className="mt-10 inline-block w-fit border-b border-navy pb-1 text-[10px] uppercase tracking-[0.3em] transition-colors hover:text-labblue"
+              className="mt-7 inline-flex border border-navy/30 px-6 py-3 text-[14px] font-medium text-navy transition-colors hover:border-navy hover:bg-navy hover:text-white"
             >
-              Contact Us
+              Contact us
             </Link>
           </div>
+        </section>
 
-          <div className="w-full p-8 md:w-[60%] md:p-16">
+        <section className="bg-white px-6 py-16 md:px-10 md:py-20">
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[240px_1fr] lg:gap-20">
+            <nav className="hidden lg:block" aria-label="Categories">
+              <ol className="sticky top-[180px] space-y-2 border-l border-hairline pl-5 text-[13px] text-steel">
+                {FAQ_CATEGORIES.map((category) => (
+                  <li key={category.name}>
+                    <a
+                      href={`#${category.name.toLowerCase().replace(/[^a-z]+/g, "-")}`}
+                      className="hover:text-navy"
+                    >
+                      {category.name}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
             <div className="max-w-2xl space-y-16">
               {FAQ_CATEGORIES.map((category) => (
-                <section key={category.name}>
-                  <h2 className="text-[10px] uppercase tracking-[0.3em] text-labblue">
+                <section
+                  key={category.name}
+                  id={category.name.toLowerCase().replace(/[^a-z]+/g, "-")}
+                  className="scroll-mt-[190px]"
+                >
+                  <h2 className="text-[22px] font-medium tracking-[-0.01em] text-navy">
                     {category.name}
                   </h2>
-                  <dl className="mt-6 divide-y divide-hairline border-t border-hairline">
+                  <dl className="mt-5 divide-y divide-hairline border-y border-hairline">
                     {category.items.map((item) => (
-                      <div key={item.q} className="py-8">
-                        <dt className="font-display text-xl text-ink md:text-2xl">
-                          {item.q}
-                        </dt>
-                        <dd className="mt-3 leading-relaxed text-steel">
-                          {item.a}
-                        </dd>
+                      <div key={item.q} className="py-6">
+                        <dt className="text-[16px] font-medium text-navy">{item.q}</dt>
+                        <dd className="mt-2 text-[15px] leading-[1.65] text-steel">{item.a}</dd>
                       </div>
                     ))}
                   </dl>

@@ -10,8 +10,8 @@ const NAV = [
   { label: "Peptides", to: "/collection" },
   { label: "Research", to: "/research" },
   { label: "Quality", to: "/quality" },
-  { label: "Lab Reports", to: "/lab-reports" },
-  { label: "About Us", to: "/about" },
+  { label: "Lab reports", to: "/lab-reports" },
+  { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ] as const;
 
@@ -23,13 +23,12 @@ export function SiteHeader() {
   const addedNotice = useCartStore((state) => state.addedNotice);
   const dismissAddedNotice = useCartStore((state) => state.dismissAddedNotice);
 
-
   useEffect(() => {
     if (addedNotice) setCartOpen(true);
   }, [addedNotice]);
   const [menuOpen, setMenuOpen] = useState(false);
   const totalItems = useCartStore((state) =>
-    state.items.reduce((sum, item) => sum + item.quantity, 0)
+    state.items.reduce((sum, item) => sum + item.quantity, 0),
   );
 
   useEffect(() => {
@@ -46,7 +45,7 @@ export function SiteHeader() {
 
         {/* Utility row */}
         <div className="border-b border-hairline bg-white px-6 md:px-10">
-          <div className="mx-auto flex max-w-7xl items-center gap-6 py-3.5">
+          <div className="mx-auto flex max-w-7xl items-center gap-8 py-4">
             <Link to="/" aria-label="Regent Peptides home" className="shrink-0">
               <BrandLogo />
             </Link>
@@ -61,7 +60,7 @@ export function SiteHeader() {
                 });
               }}
 
-              className="hidden flex-1 items-center rounded-sm border border-hairline bg-white focus-within:border-navy md:flex"
+              className="ml-auto hidden w-full max-w-xs items-center border-b border-hairline bg-white transition-colors focus-within:border-navy md:flex"
               role="search"
             >
               <input
@@ -69,32 +68,32 @@ export function SiteHeader() {
                 name="q"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search peptides and research compounds..."
+                placeholder="Search compounds"
                 aria-label="Search peptides"
-                className="w-full bg-transparent px-4 py-3 text-sm text-ink outline-none placeholder:text-steel/70"
+                className="w-full bg-transparent py-2 text-[13px] text-ink outline-none placeholder:text-steel/70"
               />
               <button
                 type="submit"
                 aria-label="Search"
-                className="border-l border-hairline px-4 py-3 text-steel transition-colors hover:text-navy"
+                className="pl-3 text-steel transition-colors hover:text-navy"
               >
-                <Search className="h-[18px] w-[18px]" strokeWidth={1.6} />
+                <Search className="h-4 w-4" strokeWidth={1.6} />
               </button>
             </form>
 
-
-            <div className="ml-auto flex shrink-0 items-center gap-6 md:ml-0">
+            <div className="ml-auto flex shrink-0 items-center gap-6 md:ml-2">
               <button
-
                 onClick={() => setCartOpen(true)}
-                className="relative flex flex-col items-center text-steel transition-colors hover:text-navy"
+                className="relative flex items-center gap-2 text-navy transition-colors hover:text-labblue"
                 aria-label={`Open basket (${totalItems} items)`}
               >
-                <ShoppingCart className="h-[19px] w-[19px]" strokeWidth={1.5} />
-                <span className="mt-1 text-[10px]">Cart</span>
-                <span className="absolute -top-1.5 right-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-labblue px-1 text-[9px] font-bold text-white">
-                  {totalItems}
-                </span>
+                <ShoppingCart className="h-[18px] w-[18px]" strokeWidth={1.5} />
+                <span className="hidden text-[13px] font-medium sm:inline">Basket</span>
+                {totalItems > 0 && (
+                  <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-labblue px-1 text-[10px] font-semibold text-white">
+                    {totalItems}
+                  </span>
+                )}
               </button>
               <button
                 onClick={() => setMenuOpen(true)}
@@ -109,13 +108,13 @@ export function SiteHeader() {
 
         {/* Navigation row */}
         <div className="hidden border-b border-hairline bg-white px-6 md:px-10 lg:block">
-          <div className="mx-auto flex max-w-7xl items-center justify-between py-3">
+          <div className="mx-auto flex max-w-7xl items-center justify-between py-2.5">
             <nav className="flex items-center gap-8">
               {NAV.map((item) => (
                 <Link
                   key={item.label}
                   to={item.to}
-                  className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-navy/80 transition-colors hover:text-labblue"
+                  className="text-[13.5px] font-medium tracking-[0.01em] text-navy/85 transition-colors hover:text-labblue"
                   activeProps={{ className: "text-labblue" }}
                 >
                   {item.label}
@@ -124,9 +123,9 @@ export function SiteHeader() {
             </nav>
             <Link
               to="/contact"
-              className="border border-labblue px-5 py-2.5 font-display text-[10px] font-bold uppercase tracking-[0.16em] text-labblue transition-colors hover:bg-labblue hover:text-white"
+              className="border border-navy/30 px-4 py-2 text-[12.5px] font-medium text-navy transition-colors hover:border-navy hover:bg-navy hover:text-white"
             >
-              Bulk Inquiry
+              Bulk enquiry
             </Link>
           </div>
         </div>
@@ -140,11 +139,7 @@ export function SiteHeader() {
       >
         <div className="flex items-center justify-between border-b border-hairline px-6 py-5">
           <BrandLogo compact />
-          <button
-            onClick={() => setMenuOpen(false)}
-            className="text-navy"
-            aria-label="Close menu"
-          >
+          <button onClick={() => setMenuOpen(false)} className="text-navy" aria-label="Close menu">
             <X className="h-6 w-6" strokeWidth={1.6} />
           </button>
         </div>
@@ -154,13 +149,13 @@ export function SiteHeader() {
               key={item.label}
               to={item.to}
               onClick={() => setMenuOpen(false)}
-              className="border-b border-hairline py-5 font-display text-lg font-bold uppercase tracking-[0.06em] text-navy"
+              className="border-b border-hairline py-5 text-[24px] font-medium leading-none text-navy"
             >
               {item.label}
             </Link>
           ))}
         </nav>
-        <p className="px-6 pt-8 text-[10px] uppercase tracking-[0.18em] text-steel">
+        <p className="px-6 pt-8 text-[12px] text-steel">
           For research use only. Not for human consumption.
         </p>
       </div>
